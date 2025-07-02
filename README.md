@@ -31,6 +31,6 @@ A simple task management system built using Laravel and Livewire. Users can log 
 
 ### 1. Clone the repository
 ```bash
-git clone https://github.com/your-username/task-manager.git
+git clone https://github.com/felixndumba/TASK-MANAGER.git
 cd task-manager
 email:bundif2003@gmail for setup assistance
