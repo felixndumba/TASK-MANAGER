@@ -11,6 +11,8 @@ protected $fillable=[
       'title',
     'is_completed',
     'user_id', 
-    'due_date',// 🔐 associate with user
+    'due_date',
+     'priority',      
+      'description',// 🔐 associate with user
 ];
 }
