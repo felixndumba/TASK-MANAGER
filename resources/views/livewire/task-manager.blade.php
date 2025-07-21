@@ -14,20 +14,24 @@
             </div>
 
             <!-- Due Date -->
-            <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Due Date</label>
-                <div class="relative">
-                    <input type="date" wire:model="dueDate"
-                           class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 text-sm">
-                    <div class="absolute left-3 top-2.5 text-gray-400 pointer-events-none">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
-                             viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                  d="M8 7V3M16 7V3M4 11h16M5 19h14a2 2 0 002-2V7H3v10a2 2 0 002 2z"/>
-                        </svg>
-                    </div>
-                </div>
-            </div>
+           <div>
+    <label class="block text-sm font-medium text-gray-700 mb-1">Due Date</label>
+    <div class="relative">
+        <!-- Input with extra padding-left to make space for icon -->
+        <input type="date" wire:model="dueDate"
+               class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 text-sm">
+
+        <!-- Icon correctly positioned and won't block input -->
+        <div class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                 viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M8 7V3M16 7V3M4 11h16M5 19h14a2 2 0 002-2V7H3v10a2 2 0 002 2z"/>
+            </svg>
+        </div>
+    </div>
+</div>
+
 
             <!-- Optional: Priority (not stored unless you add it to model/controller) -->
             <div>
@@ -58,7 +62,7 @@
 
     <!-- Task List -->
     <div class="pt-4">
-        <h3 class="text-xl font-bold text-gray-900 mb-4">Task List</h3>
+        <h3 class="text-xl font-bold text-gray-900 mb-4 ">My Tasks</h3>
 
         @forelse ($tasks as $task)
             <div class="bg-[#f9fdf9] rounded-lg border shadow-sm p-4 mb-3">

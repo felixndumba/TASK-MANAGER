@@ -8,60 +8,48 @@ use Illuminate\Support\Facades\Auth;
 
 class TaskManager extends Component
 {
-
     public string $newTask = '';
     public $dueDate = '';
-   
-
-    public function mount(): void
-    {
-        $this->loadTasks();
-    }
+    public $priority = 'medium';
 
     public function addTask(): void
     {
         $this->validate([
-        'newTask' => 'required|string|min:3',
-        'dueDate' => 'nullable|date',
-    ]);
-   
+            'newTask' => 'required|string|min:3',
+            'dueDate' => 'nullable|date',
+            'priority' => 'required|string|in:high,medium,low',
+        ]);
 
-    Task::create([
-        'title' => $this->newTask,
-        'user_id' => Auth::id(),
-        'due_date' => $this->dueDate, // 🔐 associate with user
-    ]);
+        Task::create([
+            'title' => $this->newTask,
+            'user_id' => Auth::id(),
+            'due_date' => $this->dueDate,
+            'priority' => $this->priority,
+        ]);
 
-    $this->newTask = '';
-    $this->loadTasks();
-     $this->dueDate = '';
+
+        // Reset inputs
+        $this->newTask = '';
+        $this->dueDate = '';
+        $this->priority = 'medium';
     }
 
     public function toggleTask(int $taskId): void
     {
-        $task = Task::find($taskId);
+        $task = Task::where('user_id', Auth::id())->findOrFail($taskId);
         $task->is_completed = !$task->is_completed;
         $task->save();
-
-        $this->loadTasks();
     }
 
     public function removeTask(int $taskId): void
     {
-        Task::destroy($taskId);
-        $this->loadTasks();
-    }
-
-    public function loadTasks(): void
-    {
-      
-        
+        $task = Task::where('user_id', Auth::id())->findOrFail($taskId);
+        $task->delete();
     }
 
     public function render()
     {
-          $tasks = Task::where('user_id', auth()->id())->latest()->get(); // ✅ Eloquent objects
-    return view('livewire.task-manager', compact('tasks'));
+        $tasks = Task::where('user_id', Auth::id())->latest()->get();
+        return view('livewire.task-manager', compact('tasks'));
     }
 }
-

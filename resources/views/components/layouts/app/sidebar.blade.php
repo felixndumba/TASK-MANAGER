@@ -16,6 +16,11 @@
             <flux:navlist variant="outline">
                 <flux:navlist.group >
                     <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
+                    <flux:modal.trigger name="my-work-modal">
+                        <flux:navlist.item icon="briefcase" class="cursor-pointer select-none">{{ __('My Work') }}</flux:navlist.item>
+                    </flux:modal.trigger>
+
+                  
                 </flux:navlist.group>
             </flux:navlist>
 
@@ -68,6 +73,11 @@
                 </flux:menu>
             </flux:dropdown>
         </flux:sidebar>
+
+        <flux:modal name="my-work-modal" focusable class="max-w-4xl">
+            <livewire:my-work />
+        </flux:modal>
+
 
         <!-- Mobile User Menu -->
         <flux:header class="lg:hidden">
